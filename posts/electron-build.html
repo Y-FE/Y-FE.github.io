@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Y-FE | Electron 打包应用</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.f54a71aa.css" as="style"><link rel="preload" href="/assets/js/app.bc0f1912.js" as="script"><link rel="preload" href="/assets/js/1.34cf48a3.js" as="script"><link rel="prefetch" href="/assets/js/4.630da99c.js"><link rel="prefetch" href="/assets/js/2.30269f98.js"><link rel="prefetch" href="/assets/js/3.73f5007a.js"><link rel="prefetch" href="/assets/js/5.5deb7995.js"><link rel="prefetch" href="/assets/js/6.d4ef873b.js"><link rel="prefetch" href="/assets/js/7.88ab968a.js"><link rel="prefetch" href="/assets/js/8.05203588.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f54a71aa.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      Y-FE
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><ul class="sidebar-links"><li><a href="/posts/electron-build.html" class="active sidebar-link">Electron 打包应用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/posts/electron-build.html#包含文件" class="sidebar-link">包含文件</a></li><li class="sidebar-sub-header"><a href="/posts/electron-build.html#包含可执行程序" class="sidebar-link">包含可执行程序</a></li><li class="sidebar-sub-header"><a href="/posts/electron-build.html#自动更新" class="sidebar-link">自动更新</a></li><li class="sidebar-sub-header"><a href="/posts/electron-build.html#代码签名" class="sidebar-link">代码签名</a></li></ul></li><li><a href="/posts/304.html" class="sidebar-link">接口缓存控制</a></li><li><a href="/posts/auto-sort.html" class="sidebar-link">VuePress 文章自动添加</a></li><li><a href="/posts/" class="sidebar-link">文章示例</a></li></ul></div><div class="page"><div class="content"><h1 id="electron-打包应用"><a href="#electron-打包应用" aria-hidden="true" class="header-anchor">#</a> Electron 打包应用</h1><p>使用 electron-builder 简化打包工作。</p><h2 id="包含文件"><a href="#包含文件" aria-hidden="true" class="header-anchor">#</a> 包含文件</h2><p>electron-builder 默认会将项目目录下的文件都打包到目标文件中。不过有一些文件是我们不希望被打包的，比如我们把用来部署的一些凭证（如：OSS Bucket config）放在了目录下面。</p><p>相关配置可以在官方文档中查看 <code>package.build.files[].filter</code>。</p><h2 id="包含可执行程序"><a href="#包含可执行程序" aria-hidden="true" class="header-anchor">#</a> 包含可执行程序</h2><blockquote><p>Node中有一些可以执行程序的API，如child_process.exec，child_process.spawn和child_process.execFile等，但只有execFile可以执行asar包中的程序。
+因为exec和spawn允许command替代file作为输入，而command是需要在shell下执行的，目前没有可靠的方法来判断command中是否在操作一个asar包中的文件，而且即便可以判断，我们依旧无法保证可以在无任何副作用的情况下替换command中的文件路径。</p></blockquote><p>如果内部包含可执行程序，并且无法确定其被调用的方式，那就需要将这些可执行程序从 asar 包中提取出来。</p><p>在我们的应用中为了支持 Windows 系统的通知（自带的 Notification 模块在 Windows 上存在问题），使用了 <code>node-notifier</code> 模块，该模块对于 Windows7 的气泡通知是使用 <code>notifu</code> 等可执行程序。</p><p>相关配置可以在官方文档中查看 <code>package.build.asarUnpack</code>。</p><h2 id="自动更新"><a href="#自动更新" aria-hidden="true" class="header-anchor">#</a> 自动更新</h2><p>前端开发在工程化正常实施的情况下，代码的及时更新和网络缓存优化都可以完美解决。</p><p>但是客户端的情况有所不同，我们使用 electron-updater 来支持自动更新。
+因为我们使用阿里云 OSS，没在 electron-updater 的支持里面，无法做到自动发布，所以选择 <code>provider</code> 为 <code>generic</code>，配合我们为前端代码部署缩写的部署工具进行发布部署。</p><p>相关配置可以在官方文档中查看 <code>package.build.publish</code>。</p><h2 id="代码签名"><a href="#代码签名" aria-hidden="true" class="header-anchor">#</a> 代码签名</h2><p>代码签名是为了安装使用过程中的用户友好，如果缺少有效的代码签名，用户安装过程困难重重。Mac 的安全策略会阻止打开，Windows 系统也会提示，360 等软件更可能认为有病毒。</p><p>好在用 electron-builder 签名也很简单，Mac 上使用开发者账号即可，Windows 上我们是买 沃通 的证书，沃通 证书有一个问题是只有 U 盘版，密码需要手动输入，导致我们打包一个版本需要输入 10 次密码。所以最好购买可以导出为文件的证书。</p></div><!----><div class="content page-nav"><p class="inner"><!----><span class="next"><a href="/posts/304.html">
+          接口缓存控制
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/assets/js/1.34cf48a3.js" defer></script><script src="/assets/js/app.bc0f1912.js" defer></script>
+  </body>
+</html>

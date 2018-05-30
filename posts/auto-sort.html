@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Y-FE | VuePress 文章自动添加</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.f54a71aa.css" as="style"><link rel="preload" href="/assets/js/app.bc0f1912.js" as="script"><link rel="preload" href="/assets/js/2.30269f98.js" as="script"><link rel="prefetch" href="/assets/js/4.630da99c.js"><link rel="prefetch" href="/assets/js/1.34cf48a3.js"><link rel="prefetch" href="/assets/js/3.73f5007a.js"><link rel="prefetch" href="/assets/js/5.5deb7995.js"><link rel="prefetch" href="/assets/js/6.d4ef873b.js"><link rel="prefetch" href="/assets/js/7.88ab968a.js"><link rel="prefetch" href="/assets/js/8.05203588.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f54a71aa.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      Y-FE
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><ul class="sidebar-links"><li><a href="/posts/electron-build.html" class="sidebar-link">Electron 打包应用</a></li><li><a href="/posts/304.html" class="sidebar-link">接口缓存控制</a></li><li><a href="/posts/auto-sort.html" class="active sidebar-link">VuePress 文章自动添加</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/posts/auto-sort.html#目录自动添加" class="sidebar-link">目录自动添加</a></li><li class="sidebar-sub-header"><a href="/posts/auto-sort.html#按修改时间排序" class="sidebar-link">按修改时间排序</a></li></ul></li><li><a href="/posts/" class="sidebar-link">文章示例</a></li></ul></div><div class="page"><div class="content"><h1 id="vuepress-文章自动添加"><a href="#vuepress-文章自动添加" aria-hidden="true" class="header-anchor">#</a> VuePress 文章自动添加</h1><p>目前（2018-04-25） VuePress 还未加入 blog 支持，并不能自动把一个目录下的文件加到 sideBar 中（也可能我没有仔细读文档 😄）。
+实现文章自动添加可以用一小段代码实现。</p><h2 id="目录自动添加"><a href="#目录自动添加" aria-hidden="true" class="header-anchor">#</a> 目录自动添加</h2><pre class="language-js"><code><span class="token comment">// .vuepress/config.js</span>
+<span class="token keyword">function</span> <span class="token function">dir2side</span><span class="token punctuation">(</span>dirs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> dirs<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>file <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> name <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        name <span class="token operator">=</span> name<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/^README$/</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> posts <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readdirSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'../posts/'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    themeConfig<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        sidebar<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'/posts/'</span><span class="token punctuation">:</span> <span class="token function">dir2side</span><span class="token punctuation">(</span>posts<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">'/'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        sidebarDepth<span class="token punctuation">:</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>因为 VuePress 自动把 README.md 编译成 index.html，所以需要把 <code>'README'</code> 转成 <code>''</code>。</p><h2 id="按修改时间排序"><a href="#按修改时间排序" aria-hidden="true" class="header-anchor">#</a> 按修改时间排序</h2><p>目录自动添加到 sideBar 后排序是不固定的，再添加通过修改时间排序的支持：</p><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">getFiles</span><span class="token punctuation">(</span>dir<span class="token punctuation">,</span> sortKey <span class="token operator">=</span> <span class="token string">'mtime'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> files <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readdirSync</span><span class="token punctuation">(</span>dir<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> files<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>
+            fs<span class="token punctuation">.</span><span class="token function">statSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>dir<span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>sortKey<span class="token punctuation">]</span> <span class="token operator">&lt;</span>
+            fs<span class="token punctuation">.</span><span class="token function">statSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>dir<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>sortKey<span class="token punctuation">]</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> posts <span class="token operator">=</span> <span class="token function">getFiles</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'../posts'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>通过 <code>fs.stat</code> 读取文件的修改时间，并通过修改时间对 sideBar 进行排序。</p></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+        ← <a href="/posts/304.html" class="prev">
+          接口缓存控制
+        </a></span><span class="next"><a href="/posts/" class="router-link-active">
+          文章示例
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/assets/js/2.30269f98.js" defer></script><script src="/assets/js/app.bc0f1912.js" defer></script>
+  </body>
+</html>

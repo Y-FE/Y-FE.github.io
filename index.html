@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Y-FE</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.f54a71aa.css" as="style"><link rel="preload" href="/assets/js/app.bc0f1912.js" as="script"><link rel="preload" href="/assets/js/6.d4ef873b.js" as="script"><link rel="preload" href="/assets/js/7.88ab968a.js" as="script"><link rel="preload" href="/assets/js/8.05203588.js" as="script"><link rel="prefetch" href="/assets/js/4.630da99c.js"><link rel="prefetch" href="/assets/js/1.34cf48a3.js"><link rel="prefetch" href="/assets/js/2.30269f98.js"><link rel="prefetch" href="/assets/js/3.73f5007a.js"><link rel="prefetch" href="/assets/js/5.5deb7995.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f54a71aa.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-exact-active router-link-active"><!----><span class="site-name">
+      Y-FE
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><ul class="sidebar-links"><li><a href="/" class="active sidebar-link">Home</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/#编码规范" class="sidebar-link">编码规范</a></li><li class="sidebar-sub-header"><a href="/#今日头条" class="sidebar-link">今日头条</a></li><li class="sidebar-sub-header"><a href="/#成员" class="sidebar-link">成员</a></li></ul></li></ul></div><div class="home"><div class="hero"><img src="/hero.png" alt="hero"><h1>Y-FE</h1><p class="description">
+      欢迎来到亦友前端
+    </p><p class="action"><a href="/posts/" class="nav-link action-button">文章列表 →</a></p></div><div class="features"><div class="feature"><h2>热爱前端</h2><p>唯有爱才能让人奋不顾身，因为实现一个小功能、写完一个没有 Bug 的界面或是完成一段自动化脚步而兴奋不已。</p></div><div class="feature"><h2>技术路线</h2><p>丰富的技术方向，Vue.js、TypeScript、Nuxt.js、Webpack、Canvas、Websocket、 Cordova、NW.js，总在追赶潮流。</p></div><div class="feature"><h2>自由折腾</h2><p>只要你感兴趣、能 Hold 住，任何技术都是被鼓励的，但是有着理想主义情怀的成员可能会和你争论该用哪个编辑器。</p></div></div><div class="content custom"><h2 id="编码规范"><a href="#编码规范" aria-hidden="true" class="header-anchor">#</a> 编码规范</h2><p>我们使用最简单的方案来约束：<a href="/code-style/">Prettier</a></p><h2 id="今日头条"><a href="#今日头条" aria-hidden="true" class="header-anchor">#</a> 今日头条</h2><pre class="language-typescript"><code><span class="token comment">/* 计算一个 Canvas 中有笔画的区域 */</span>
+
+<span class="token keyword">function</span> <span class="token function">calcArea</span><span class="token punctuation">(</span>
+    view<span class="token punctuation">:</span> Uint32Array<span class="token punctuation">,</span>
+    width<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+    height<span class="token punctuation">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    top<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+    right<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+    bottom<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+    left<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> top<span class="token punctuation">,</span> right<span class="token punctuation">,</span> bottom<span class="token punctuation">,</span> left<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">,</span> l<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> view<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>view<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            top <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>i <span class="token operator">/</span> width<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            left <span class="token operator">=</span> i <span class="token operator">%</span> width<span class="token punctuation">;</span>
+            right <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            bottom <span class="token operator">=</span> top<span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> view<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&gt;</span> i<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>view<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            bottom <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>j <span class="token operator">/</span> width<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            left <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>j <span class="token operator">%</span> width<span class="token punctuation">,</span> left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            right <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>j <span class="token operator">%</span> width<span class="token punctuation">,</span> right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> tmp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> tmp <span class="token operator">&lt;</span> left<span class="token punctuation">;</span> tmp<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>k <span class="token operator">=</span> width <span class="token operator">*</span> top <span class="token operator">+</span> tmp<span class="token punctuation">;</span> k <span class="token operator">&lt;</span> j<span class="token punctuation">;</span> k <span class="token operator">+=</span> width<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>view<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                left <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> tmp <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> tmp <span class="token operator">&lt;</span> width <span class="token operator">-</span> right<span class="token punctuation">;</span> tmp<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>l <span class="token operator">=</span> width <span class="token operator">*</span> top <span class="token operator">-</span> tmp<span class="token punctuation">;</span> l <span class="token operator">&lt;</span> j<span class="token punctuation">;</span> l <span class="token operator">+=</span> width<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>view<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                right <span class="token operator">=</span> width <span class="token operator">-</span> tmp<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        top<span class="token punctuation">,</span>
+        right<span class="token punctuation">,</span>
+        bottom<span class="token punctuation">,</span>
+        left
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="成员"><a href="#成员" aria-hidden="true" class="header-anchor">#</a> 成员</h2><div class="avatar-list" data-v-9d4fa322><div class="avatar-container" data-v-5d7a0c69><img src="http://cdn-1.blockinline.cn/icon_512x512@2x.png!888Webp" title="pxq" class="avatar" data-v-5d7a0c69><a href="http://bold.blockinline.cn" target="_blank" data-v-5d7a0c69>@pxq</a></div><div class="avatar-container" data-v-5d7a0c69><img src="http://cdn-1.blockinline.cn/5.png!888Webp" title="zhenyi" class="avatar" data-v-5d7a0c69><a href="" target="" data-v-5d7a0c69>@zhenyi</a></div><div class="avatar-container" data-v-5d7a0c69><img src="http://cdn-1.blockinline.cn/3.png!888Webp" title="zhoumimi" class="avatar" data-v-5d7a0c69><a href="" target="" data-v-5d7a0c69>@zhoumimi</a></div><div class="avatar-container" data-v-5d7a0c69><img src="http://cdn-1.blockinline.cn/9.png!888Webp" title="gaopengxing" class="avatar" data-v-5d7a0c69><a href="" target="" data-v-5d7a0c69>@gaopengxing</a></div><div class="avatar-container" data-v-5d7a0c69><img src="http://cdn-1.blockinline.cn/6.png!888Webp" title="wangkun" class="avatar" data-v-5d7a0c69><a href="" target="" data-v-5d7a0c69>@wangkun</a></div></div></div><div class="footer">
+    @亦友教育前端团队 Powered by VuePress
+  </div></div></div></div>
+    <script src="/assets/js/6.d4ef873b.js" defer></script><script src="/assets/js/7.88ab968a.js" defer></script><script src="/assets/js/8.05203588.js" defer></script><script src="/assets/js/app.bc0f1912.js" defer></script>
+  </body>
+</html>

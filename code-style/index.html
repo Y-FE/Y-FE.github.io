@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Y-FE | Code Style</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.f54a71aa.css" as="style"><link rel="preload" href="/assets/js/app.bc0f1912.js" as="script"><link rel="preload" href="/assets/js/5.5deb7995.js" as="script"><link rel="prefetch" href="/assets/js/4.630da99c.js"><link rel="prefetch" href="/assets/js/1.34cf48a3.js"><link rel="prefetch" href="/assets/js/2.30269f98.js"><link rel="prefetch" href="/assets/js/3.73f5007a.js"><link rel="prefetch" href="/assets/js/6.d4ef873b.js"><link rel="prefetch" href="/assets/js/7.88ab968a.js"><link rel="prefetch" href="/assets/js/8.05203588.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f54a71aa.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      Y-FE
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><ul class="sidebar-links"><li><a href="/code-style/" class="active sidebar-link">Code Style</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/code-style/#vscode-配置" class="sidebar-link">VSCode 配置</a></li><li class="sidebar-sub-header"><a href="/code-style/#其他编辑器配置" class="sidebar-link">其他编辑器配置</a></li></ul></li></ul></div><div class="page"><div class="content"><h1 id="code-style"><a href="#code-style" aria-hidden="true" class="header-anchor">#</a> Code Style</h1><p>曾经我们定义一套 ESlint 的规则来约束代码规范，但是使用的过程并不让人愉快 💩 ，就像公司一些值得商榷的规定，却需要我们花一定的时间去应对，直到我们使用 <a href="https://prettier.io" target="_blank" rel="noopener noreferrer">Prettier</a> 来进行代码规范的约束：</p><ul><li>你不必再去了解 ESlint 的配置</li><li>不需要再看到代码不符合规范时那红色、绿色的波浪下划线</li><li>只需要简单配置，即可在保存时自动格式化</li></ul><p>从此写代码愉悦感提升 💯</p><h2 id="vscode-配置"><a href="#vscode-配置" aria-hidden="true" class="header-anchor">#</a> VSCode 配置</h2><p>安装 <code>prettier-vscode</code> 插件，
+在 VSCode 设置中增加如下配置，即可在 <code>*.js</code><code>*.ts</code><code>*.vue</code> 文件中为相应的代码进行自动格式化。</p><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;[javascript]&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;editor.formatOnSave&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;[typescript]&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;editor.formatOnSave&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;[vue]&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;editor.formatOnSave&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;vetur.format.defaultFormatter.js&quot;</span><span class="token operator">:</span> <span class="token string">&quot;prettier&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;vetur.format.defaultFormatter.ts&quot;</span><span class="token operator">:</span> <span class="token string">&quot;prettier&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;vetur.format.defaultFormatter.css&quot;</span><span class="token operator">:</span> <span class="token string">&quot;prettier&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>因为历史原因我们增加一些规范修改 <code>.prettierrc</code>:</p><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;tabWidth&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;singleQuote&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</code></pre><p>更详细的说明，请查看 <a href="https://prettier.io" target="_blank" rel="noopener noreferrer">Prettier</a>。</p><h2 id="其他编辑器配置"><a href="#其他编辑器配置" aria-hidden="true" class="header-anchor">#</a> 其他编辑器配置</h2><p>推荐使用 <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">VSCode</a></p></div><!----><!----></div></div></div>
+    <script src="/assets/js/5.5deb7995.js" defer></script><script src="/assets/js/app.bc0f1912.js" defer></script>
+  </body>
+</html>
